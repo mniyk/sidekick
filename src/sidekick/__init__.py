@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from sidekick!")
+"""sidekick: personal AI agents built with the Claude Agent SDK."""
