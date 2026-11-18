@@ -8,6 +8,7 @@ from __future__ import annotations
 import typer
 
 from sidekick.agents.commit.command import commit
+from sidekick.agents.research.command import research
 
 app = typer.Typer(
     help="Personal AI agents built with the Claude Agent SDK.",
@@ -18,7 +19,7 @@ app = typer.Typer(
 @app.callback()
 def main() -> None:
     """Personal AI agents built with the Claude Agent SDK."""
-    # Having a callback keeps `commit` a subcommand even while it is the only one.
 
 
 app.command()(commit)
+app.command()(research)
