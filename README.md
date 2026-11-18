@@ -8,6 +8,7 @@ Each agent is a subcommand of one CLI, `sidekick`.
 | Command | What it does |
 | --- | --- |
 | `sidekick commit` | Drafts a Conventional Commits message for the staged changes, shows a Japanese translation, and copies the message to the clipboard |
+| `sidekick research "<topic>"` | Researches a topic on the web and shows a report in Japanese, with sources |
 
 ## Requirements
 
@@ -59,6 +60,15 @@ sidekick commit
 
 Paste the copied message with `git commit`.
 
+### `sidekick research`
+
+```bash
+sidekick research "Claude Agent SDK の最新動向"
+```
+
+- The agent can only search the web and read web pages. It cannot touch files or run commands.
+- The report is shown in the terminal. To keep it, redirect it: `sidekick research "..." > report.md`.
+
 ## Project structure
 
 One folder per agent, holding everything that agent needs.
@@ -67,10 +77,14 @@ One folder per agent, holding everything that agent needs.
 src/sidekick/
 ├── cli.py              # registers each agent's command
 └── agents/
-    └── commit/
-        ├── agent.py        # calls Claude through the Agent SDK
-        ├── command.py      # the `sidekick commit` command
-        └── convention.md   # the commit convention given to Claude
+    ├── commit/
+    │   ├── agent.py        # calls Claude through the Agent SDK
+    │   ├── command.py      # the `sidekick commit` command
+    │   └── convention.md   # the commit convention given to Claude
+    └── research/
+        ├── agent.py        # lets Claude search and read the web
+        ├── command.py      # the `sidekick research` command
+        └── prompt.md       # how to research and write the report
 ```
 
 To add an agent, create a folder under `agents/` and register its command in `cli.py`.
